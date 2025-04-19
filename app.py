@@ -7,11 +7,10 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    result_image = None
     if request.method == 'POST':
         file = request.files['image']
         if file:
-            input_image = Image.open(file.stream)
+            input_image = Image.open(file.stream).convert("RGBA")
             output = remove(input_image)
             byte_io = io.BytesIO()
             output.save(byte_io, 'PNG')
@@ -20,4 +19,4 @@ def index():
     return render_template('index.html')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=8080)
