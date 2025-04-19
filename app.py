@@ -18,5 +18,6 @@ def index():
             return send_file(byte_io, mimetype='image/png', as_attachment=True, download_name='no-bg.png')
     return render_template('index.html')
 
+# 🔧 必須設定 host 和 port，才能被 Railway 訪問
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
